@@ -23,9 +23,7 @@ Or install directly from source (development mode):
 
 ```
 git clone https://github.com/FadlGh/EvalGit.git
-
 cd EvalGit
-
 pip install -e .
 ```
 
@@ -66,16 +64,10 @@ Example paths:
 See CONTRIBUTING.md for full guidelines.
 
 ```
-git clone https://github.com/FadlGh/EvalGit.git
-
+git clone https://github.com/YOUR_USERNAME/EvalGit.git
 cd EvalGit
-
 python -m venv venv
-
-source venv/bin/activate
-
-pip install -r requirements.txt
-
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -e .
 ```
 
