@@ -1,7 +1,11 @@
-from core.io import load_json_array
-from core.metrics import compute_metrics
+from core.log import log_evaluation
 
-y_true = load_json_array("test_data/ground_truth.json", key="ground_truth")
-y_pred = load_json_array("test_data/predictions.json", key="predictions")
-metrics = compute_metrics(y_true, y_pred)
-print(metrics)
+if __name__ == "__main__":
+    # Replace with actual test files you have
+    model_id = "test_model_v2"
+    gt_file = "test_data/ground_truth.json"
+    pred_file = "test_data/predictions.json"
+    dataset_name = "test_dataset"
+
+    metrics = log_evaluation(model_id, gt_file, pred_file, dataset_name, "this is a test")
+    print("Logged metrics:", metrics)
