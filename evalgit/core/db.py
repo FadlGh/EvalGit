@@ -39,3 +39,21 @@ def get_specific_row(key, value):
     row = cursor.fetchone()
     conn.close()
     return row
+
+def delete_all_rows():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM evaluations;")
+    conn.commit()
+    conn.close()
+
+def delete_specific_row(key, value):
+    allowed_keys = {"id", "timestamp", "model_name", "dataset", "notes"}
+    if key not in allowed_keys:
+        raise ValueError(f"Invalid key: {key}. Allowed keys are: {allowed_keys}")
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM evaluations WHERE {key} = ?;", (value,))
+    conn.commit()
+    conn.close()
