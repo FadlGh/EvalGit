@@ -9,12 +9,3 @@ def compute_metrics(y_true, y_pred):
         "recall": recall_score(y_true, y_pred, average="macro"),
     }
 
-# Load from user files
-with open("ground_truth.json") as f:
-    y_true = json.load(f)["ground_truth"]
-
-with open("predictions.json") as f:
-    y_pred = json.load(f)["predictions"]
-
-metrics = compute_metrics(y_true, y_pred)
-print(metrics)
