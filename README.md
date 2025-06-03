@@ -1,2 +1,2 @@
-# LayerPeek
-Layer Peek is a lightweight model debugging tool that hooks into neural network layers to visualize and compare intermediate activations, helping developers understand and diagnose model behavior.
+# EvalGit
+EvalGit is a lightweight CLI tool that tracks and compares machine learning model evaluation metrics over time; like git, but for performance. It stores all your model versions and their scores in a local db file, making it perfect for experimentation, reproducibility, and audits.
