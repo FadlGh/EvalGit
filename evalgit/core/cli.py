@@ -1,9 +1,10 @@
 import argparse
-from core.log import log_evaluation
-from core.db import *
-from core.report import write_report
+from .log import log_evaluation
+from .db import *
+from .report import write_report
 
 def main():
+    init_db()
     parser = argparse.ArgumentParser(prog="evalgit", description="Local model evaluation tracker")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -57,9 +58,13 @@ def main():
             else:
                 print("No matching row found.")
         else:
-            print("All evaluations:")
-            for row in get_all_evaluations():
-                print(row)
+            rows = get_all_evaluations()
+            if not rows:
+                print("DB is empty")
+            else:
+                print("All evaluations:")
+                for row in rows:
+                    print(row)
 
     elif args.command == "delete":
         if args.key and args.value:

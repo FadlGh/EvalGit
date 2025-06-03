@@ -1,7 +1,11 @@
 import os
 import sqlite3
+from platformdirs import user_data_dir
+from pathlib import Path
 
-DB_PATH = os.path.join(os.path.expanduser("~"), ".evalgit", "metrics.db")
+appname = "EvalGit"
+DB_PATH = Path(user_data_dir(appname)) / "evaluations.db"
+DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 def init_db():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)

@@ -1,15 +1,17 @@
 import os
 from datetime import datetime
+from platformdirs import user_data_dir
+from pathlib import Path
 
 def write_report(model_name, metrics, dataset, notes, timestamp=None):
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 
-    reports_dir = os.path.expanduser("~/.evalgit/reports")
-    os.makedirs(reports_dir, exist_ok=True)
+    appname = "EvalGit"
+    reports_dir = Path(user_data_dir(appname)) / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
 
-    filename = f"{model_name}_{timestamp}.md"
-    path = os.path.join(reports_dir, filename)
+    path = reports_dir / f"{model_name}_{timestamp}.md"
 
     # Determine column widths
     metric_col_width = max(len("Metric"), max(len(k.capitalize()) for k in metrics.keys()))
