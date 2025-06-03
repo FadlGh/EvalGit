@@ -18,3 +18,26 @@ def init_db():
     """)
     conn.commit()
     conn.close()
+
+def get_all_evaluations():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    rows = cursor.execute("SELECT * FROM evaluations ORDER BY timestamp DESC;").fetchall()
+    conn.close()
+    return rows
+
+
+def get_specific_row(key, value):
+    allowed_keys = {"id", "timestamp", "dataset", "notes"}  # whitelist
+    if key not in allowed_keys:
+        raise ValueError(f"Invalid key: {key}. Allowed keys are: {allowed_keys}")
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    query = f"SELECT * FROM evaluations WHERE {key} = ? LIMIT 1;"
+    cursor.execute(query, (value,))
+    row = cursor.fetchone()
+
+    conn.close()
+    return row
