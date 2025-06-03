@@ -9,8 +9,9 @@ def init_db():
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS evaluations (
-            id TEXT PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp TEXT,
+            model_name TEXT,
             dataset TEXT,
             metrics_json TEXT,
             notes TEXT
@@ -22,22 +23,19 @@ def init_db():
 def get_all_evaluations():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    rows = cursor.execute("SELECT * FROM evaluations ORDER BY timestamp DESC;").fetchall()
+    rows = cursor.execute("SELECT * FROM evaluations ORDER BY timestamp;").fetchall()
     conn.close()
     return rows
 
-
 def get_specific_row(key, value):
-    allowed_keys = {"id", "timestamp", "dataset", "notes"}  # whitelist
+    allowed_keys = {"id", "timestamp", "model_name", "dataset", "notes"}
     if key not in allowed_keys:
         raise ValueError(f"Invalid key: {key}. Allowed keys are: {allowed_keys}")
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-
     query = f"SELECT * FROM evaluations WHERE {key} = ? LIMIT 1;"
     cursor.execute(query, (value,))
     row = cursor.fetchone()
-
     conn.close()
     return row
