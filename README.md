@@ -49,6 +49,8 @@ pip install -e .
 
 `evalgit delete`
 
+with `model` meaning the model name, `gt` the path to your ground truth values(correct values), `pred` the path to your model's predictions, `notes` for optional notes, `report` optionally create report
+
 ## 📁 Data Location
 
 All logs and reports are stored in an OS-specific user data directory managed by `platformdirs`.
