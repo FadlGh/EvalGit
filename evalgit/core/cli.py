@@ -15,16 +15,17 @@ def main():
     log_parser.add_argument("--pred", required=True)
     log_parser.add_argument("--dataset", required=True)
     log_parser.add_argument("--notes", default="")
+    log_parser.add_argument("--tag", default="")
     log_parser.add_argument("--report", required=False, action="store_true")
 
     # show
     show_parser = subparsers.add_parser("show", help="Show evaluation(s)")
-    show_parser.add_argument("--key", choices=["id", "timestamp", "model_name", "dataset", "notes"])
+    show_parser.add_argument("--key", choices=["id", "timestamp", "model_name", "dataset", "notes", "tag"])
     show_parser.add_argument("--value")
 
     # delete
     delete_parser = subparsers.add_parser("delete", help="Delete evaluation(s)")
-    delete_parser.add_argument("--key", choices=["id", "timestamp", "model_name", "dataset", "notes"])
+    delete_parser.add_argument("--key", choices=["id", "timestamp", "model_name", "dataset", "notes", "tag"])
     delete_parser.add_argument("--value")
 
     args = parser.parse_args()
@@ -36,6 +37,7 @@ def main():
             pred_file=args.pred,
             dataset_name=args.dataset,
             notes=args.notes,
+            tag=args.tag
         )
         print("Logged evaluation:")
         for k, v in metrics.items():
@@ -46,6 +48,7 @@ def main():
                 metrics=metrics,
                 dataset=args.dataset,
                 notes=args.notes,
+                tag=args.tag
             )
             print(f"Markdown report saved at {path}")
 

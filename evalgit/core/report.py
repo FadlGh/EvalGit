@@ -3,7 +3,7 @@ from datetime import datetime
 from platformdirs import user_data_dir
 from pathlib import Path
 
-def write_report(model_name, metrics, dataset, notes, timestamp=None):
+def write_report(model_name, metrics, dataset, notes, tag, timestamp=None):
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 
@@ -32,7 +32,8 @@ def write_report(model_name, metrics, dataset, notes, timestamp=None):
 **Model Name:** `{model_name}`  
 **Timestamp:** `{timestamp}`  
 **Dataset:** `{dataset}`  
-**Notes:** {notes}
+**Notes:** `{notes}`
+**Tag:** `{tag}`
 
 ---
 

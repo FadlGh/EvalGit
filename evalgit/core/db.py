@@ -18,7 +18,8 @@ def init_db():
             model_name TEXT,
             dataset TEXT,
             metrics_json TEXT,
-            notes TEXT
+            notes TEXT,
+            tag TEXT
         )
     """)
     conn.commit()
@@ -32,7 +33,7 @@ def get_all_evaluations():
     return rows
 
 def get_specific_row(key, value):
-    allowed_keys = {"id", "timestamp", "model_name", "dataset", "notes"}
+    allowed_keys = {"id", "timestamp", "model_name", "dataset", "notes", "tag"}
     if key not in allowed_keys:
         raise ValueError(f"Invalid key: {key}. Allowed keys are: {allowed_keys}")
 
@@ -52,7 +53,7 @@ def delete_all_rows():
     conn.close()
 
 def delete_specific_row(key, value):
-    allowed_keys = {"id", "timestamp", "model_name", "dataset", "notes"}
+    allowed_keys = {"id", "timestamp", "model_name", "dataset", "notes", "tag"}
     if key not in allowed_keys:
         raise ValueError(f"Invalid key: {key}. Allowed keys are: {allowed_keys}")
 
